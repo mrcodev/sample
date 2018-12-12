@@ -1,5 +1,6 @@
 .DS_Store
 node_modules/
+simple_VueJs_E-Commerce/
 /dist/
 npm-debug.log*
 yarn-debug.log*
