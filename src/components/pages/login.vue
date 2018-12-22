@@ -26,6 +26,7 @@
         </tr>
       </table>
     </div>
+
   </div>
 </template>
 
@@ -51,24 +52,26 @@ export default {
           this.$axios.post('https://reqres.in/api/login',this.user)
             .then(res=>{
               this.$eventBus.$emit('loadingStatus',false);
-                //console.log(res);
 
               if(res.data.error){
-                  //alert(res.data.message);
+
                   this.$iziToast.error({
                     title: 'Error',
                     message: res.data.message,
                   });
+
               } else{
 
-                console.log(res.data);
-                //alert(res.data)
                 this.$iziToast.success({
                   title: 'OK',
                   message: res.data,
                 });
+
                 localStorage.setItem('token',res.data.token);
-                  this.$router.push({name:'admin'});
+
+                this.$axios.defaults.headers.common['Authorization'] = "Token"+localStorage.getItem("token");
+
+                this.$router.push({name:'admin'});
               }
 
             });
